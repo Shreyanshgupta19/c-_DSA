@@ -244,26 +244,6 @@ void pattern13(int n)
     }
 }
 
-void verticalBarChart(vector<int> numbers)
-{
-    int maxHeight = *max_element(numbers.begin(), numbers.end());
-    for (int height = maxHeight; height > 0; height--)
-    {
-        for (int num : numbers)
-        {
-            if (num >= height)
-            {
-                cout << "* ";
-            }
-            else
-            {
-                cout << "  ";
-            }
-        }
-        cout << endl;
-    }
-}
-
 int power(int value, int power)
 {
     int result = 1;
@@ -274,7 +254,7 @@ int power(int value, int power)
     return result;
 }
 
-void pattern15(int n)
+void pattern14(int n)
 {
     for (int i = 1; i <= n; i++)
     {
@@ -328,9 +308,6 @@ int main()
     cout << "13" << endl;
     pattern13(n);
     cout << "14" << endl;
-    vector<int> numbers = {6, 4, 3, 5};
-    verticalBarChart(numbers);
-    cout << "15" << endl;
-    pattern15(n);
+    pattern14(n);
     return 0;
 }
