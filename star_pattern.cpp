@@ -254,7 +254,7 @@ int power(int value, int power)
     return result;
 }
 
-void pattern14(int n)
+void pattern14(int &n)
 {
     for (int i = 1; i <= n; i++)
     {
@@ -271,6 +271,26 @@ void pattern14(int n)
             for (int j = 1; j <= 2 * dashCount + 1; j++)
             {
                 cout << "-";
+            }
+        }
+        cout << endl;
+    }
+}
+
+void verticalBarChart(vector<int> &numbers)
+{
+    int maxHeight = *max_element(numbers.begin(), numbers.end());
+    for (int height = maxHeight; height > 0; height--)
+    {
+        for (int num : numbers)
+        {
+            if (num >= height)
+            {
+                cout << "* ";
+            }
+            else
+            {
+                cout << "  ";
             }
         }
         cout << endl;
@@ -309,5 +329,8 @@ int main()
     pattern13(n);
     cout << "14" << endl;
     pattern14(n);
+    cout << "15" << endl;
+    vector<int> numbers = {6, 4, 3, 5};
+    verticalBarChart(numbers);
     return 0;
 }

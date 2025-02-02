@@ -7,26 +7,6 @@
 #include <sstream>
 using namespace std;
 
-void verticalBarChart(vector<int> numbers)
-{
-    int maxHeight = *max_element(numbers.begin(), numbers.end());
-    for (int height = maxHeight; height > 0; height--)
-    {
-        for (int num : numbers)
-        {
-            if (num >= height)
-            {
-                cout << "* ";
-            }
-            else
-            {
-                cout << "  ";
-            }
-        }
-        cout << endl;
-    }
-}
-
 class HistogramGenerator {
 private:
     const int MAX_HEIGHT = 20;
@@ -104,7 +84,7 @@ public:
 };
 
 void chart(){
-        HistogramGenerator generator;
+    HistogramGenerator generator;
     std::string text;
     
     std::cout << "Enter text: ";
@@ -125,9 +105,6 @@ void chart(){
 
 int main()
 {
-    vector<int> numbers = {6, 4, 3, 5};
-    verticalBarChart(numbers);
-
     chart();
     return 0;
 }
