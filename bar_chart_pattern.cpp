@@ -7,100 +7,122 @@
 #include <sstream>
 using namespace std;
 
-class HistogramGenerator {
+class HistogramGenerator
+{
 private:
     const int MAX_HEIGHT = 20;
 
-    template<typename T>
-    int getMaxValue(const std::map<T, int>& data) {
+    template <typename T>
+    int getMaxValue(const map<T, int> &data)
+    {
         int max = 0;
-        for (const auto& pair : data) {
-            if (pair.second > max) max = pair.second;
+        for (const auto &pair : data)
+        {
+            if (pair.second > max)
+                max = pair.second;
         }
         return max;
     }
 
 public:
-    std::map<int, int> collectWordLengths(const std::string& text) {
-        std::map<int, int> lengths;
-        std::istringstream iss(text);
-        std::string word;
-        
-        while (iss >> word) {
+    map<int, int> collectWordLengths(const string &text)
+    {
+        map<int, int> lengths;
+        istringstream iss(text);
+        string word;
+
+        while (iss >> word)
+        {
             lengths[word.length()]++;
         }
         return lengths;
     }
 
-    std::map<char, int> collectCharFrequencies(const std::string& text) {
-        std::map<char, int> frequencies;
-        for (char c : text) {
-            if (!std::isspace(c)) {
+    map<char, int> collectCharFrequencies(const string &text)
+    {
+        map<char, int> frequencies;
+        for (char c : text)
+        {
+            if (!isspace(c))
+            {
                 frequencies[c]++;
             }
         }
         return frequencies;
     }
 
-    template<typename T>
-    void printHorizontalHistogram(const std::map<T, int>& data, const std::string& title) {
-        std::cout << "\n" << title << ":\n";
-        for (const auto& pair : data) {
-            std::cout << pair.first << " | ";
-            for (int i = 0; i < pair.second; i++) {
-                std::cout << "*";
+    template <typename T>
+    void printHorizontalHistogram(const map<T, int> &data, const string &title)
+    {
+        cout << "\n"
+             << title << ":\n";
+        for (const auto &pair : data)
+        {
+            cout << pair.first << " | ";
+            for (int i = 0; i < pair.second; i++)
+            {
+                cout << "*";
             }
-            std::cout << " (" << pair.second << ")\n";
+            cout << " (" << pair.second << ")\n";
         }
     }
 
-    template<typename T>
-    void printVerticalHistogram(const std::map<T, int>& data, const std::string& title) {
-        if (data.empty()) return;
+    template <typename T>
+    void printVerticalHistogram(const map<T, int> &data, const string &title)
+    {
+        if (data.empty())
+            return;
 
-        std::cout << "\n" << title << ":\n";
+        cout << "\n"
+             << title << ":\n";
 
         int maxFreq = getMaxValue(data);
-        double scale = maxFreq > MAX_HEIGHT ? 
-                      static_cast<double>(MAX_HEIGHT) / maxFreq : 1.0;
+        double scale = maxFreq > MAX_HEIGHT ? static_cast<double>(MAX_HEIGHT) / maxFreq : 1.0;
 
-        for (int height = MAX_HEIGHT; height > 0; height--) {
-            for (const auto& pair : data) {
+        for (int height = MAX_HEIGHT; height > 0; height--)
+        {
+            for (const auto &pair : data)
+            {
                 int scaledHeight = static_cast<int>(pair.second * scale);
-                std::cout << (scaledHeight >= height ? "*  " : "   ");
+                cout << (scaledHeight >= height ? "*  " : "   ");
             }
-            std::cout << "\n";
+            cout << "\n";
         }
 
-        for (const auto& pair : data) {
-            if (std::is_same<T, char>::value) {
-                std::cout << pair.first << "  ";
-            } else {
-                std::cout << pair.first << (pair.first < 10 ? "  " : " ");
+        for (const auto &pair : data)
+        {
+            if (is_same<T, char>::value)
+            {
+                cout << pair.first << "  ";
+            }
+            else
+            {
+                cout << pair.first << (pair.first < 10 ? "  " : " ");
             }
         }
-        std::cout << "\n";
+        cout << "\n";
     }
 };
 
-void chart(){
+void chart()
+{
     HistogramGenerator generator;
-    std::string text;
-    
-    std::cout << "Enter text: ";
-    std::getline(std::cin, text);
-    
+    string text;
+
+    cout << "Enter text: ";
+    getline(cin, text);
+
     auto wordLengths = generator.collectWordLengths(text);
-    generator.printHorizontalHistogram(wordLengths, 
-        "Word Length Histogram (Horizontal)");
-    generator.printVerticalHistogram(wordLengths, 
-        "Word Length Histogram (Vertical)");
+    generator.printHorizontalHistogram(wordLengths,
+                                       "Word Length Histogram (Horizontal)");
+    generator.printVerticalHistogram(wordLengths,
+                                     "Word Length Histogram (Vertical)");
 
     auto charFrequencies = generator.collectCharFrequencies(text);
-    generator.printHorizontalHistogram(charFrequencies, 
-        "Character Frequency Histogram (Horizontal)");
-    generator.printVerticalHistogram(charFrequencies, 
-        "Character Frequency Histogram (Vertical)");
+    generator.printHorizontalHistogram(charFrequencies,
+                                       "Character Frequency Histogram (Horizontal)");
+    generator.printVerticalHistogram(charFrequencies,
+                                     "Character Frequency Histogram (Vertical)");
 }
 
 int main()
