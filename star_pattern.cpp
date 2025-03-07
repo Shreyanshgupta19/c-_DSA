@@ -2,7 +2,28 @@
 #include <vector>
 #include <algorithm>
 using namespace std;
-
+void ButterFly(int n){
+    for(int i = 1; i < 2*n; i++){
+        int star, space;
+        star = i;
+        space = 2*(n-i);
+        if(n < i){
+        star = 2*n-i;
+        space = 2*(i-n);
+        }
+        for(int j = 1; j <= star; j++){
+            cout<<"*";
+        }
+        for(int j = 1; j <= space; j++){
+            cout<<" ";
+        }
+        for(int j = 1; j <= star; j++){
+            cout<<"*";
+        }
+    
+        cout<<"\n";
+    }
+}
 void pattern1(int n)
 {
     for (int i = 0; i < n; i++)
@@ -330,6 +351,8 @@ int main()
     cout << "14" << endl;
     pattern14(n);
     cout << "15" << endl;
+    ButterFly(n);
+    cout << "16" << endl;
     vector<int> numbers = {6, 4, 3, 5};
     verticalBarChart(numbers);
     return 0;
